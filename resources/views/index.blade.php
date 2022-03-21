@@ -11,8 +11,12 @@
      <div class="card">
        <p class="title">Todo List</p>
        <ul>
-         @foreach( $errors->all() as $error)
-         <li>{{$error}}</li> 
+         @foreach ($items as $item)
+         <tr>
+           <td>
+             {{ $item->created_at}}
+           </td>
+         </tr>
          @endforeach
        </ul>
        <div class="todo">
