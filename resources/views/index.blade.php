@@ -10,21 +10,45 @@
    <div class="container">
      <div class="card">
        <p class="title">Todo List</p>
-       <ul>
-         @foreach ($items as $item)
-         <tr>
-           <td>
-             {{ $item->created_at}}
-           </td>
-         </tr>
-         @endforeach
        </ul>
        <div class="todo">
          <form action="/todo/create" method="post">
            @csrf
-           <input type="text" name="content">
-           <input type="submit">
+           <input type="text" class="input-add" name="content" />
+           <input class="button-add" type="submit" value='追加' />
          </form>
+         <table>
+           <tr>
+             <th>作成日</th>
+             <th>タスク名</th>
+             <th>更新<th>
+             <th>削除</th>
+           </tr>
+           @foreach($items as $item)
+           <tr>
+             <td>
+               {{ $item->created_at }}
+             </td>
+             <form action="{{ route('todo.update', ['id' => $item->id]) }}" method="post">
+               @csrf
+               <td>
+                 <input type="text" class="input-update" value="{{ $item->content }}" name="content" />
+               </td>
+               <td>
+                 <button>更新</button>
+               </td>
+             </form>
+             <td>
+              <form action="{{ route('todo.delete', ['id' =>$item->id]) }}" method="post">
+                @csrf
+                <td>
+                  <button>削除</button>
+                </td>
+              </form> 
+             </td>
+           </tr>
+           @endforeach
+         </table>
        </div>
      </div>
    </div>
