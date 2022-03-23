@@ -29,7 +29,7 @@
              <td>
                {{ $item->created_at }}
              </td>
-             <form action="{{ route('todo.update', ['id' => $item->id]) }}" method="post">
+             <form action="{{ route('todoexe.update', ['id' => $item->id]) }}" method="post">
                @csrf
                <td>
                  <input type="text" class="input-update" value="{{ $item->content }}" name="content" />
@@ -39,7 +39,7 @@
                </td>
              </form>
              <td>
-              <form action="{{ route('todo.delete', ['id' =>$item->id]) }}" method="post">
+              <form action="{{ route('todoexe.delete', ['id' =>$item->id]) }}" method="post">
                 @csrf
                 <td>
                   <button>削除</button>

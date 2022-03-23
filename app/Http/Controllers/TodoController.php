@@ -14,7 +14,7 @@ class TodoController extends Controller
     }
     public function create(Request $request)
     {
-        $this->validate($request,Todo::$rules);
+        $this->validate($request,Todoexe::$rules);
         $todo = new Todoexe;
         $form = $request->all();
         unset($form['_token_']);
@@ -23,7 +23,7 @@ class TodoController extends Controller
     }
     public function update(Request $request)
     {
-        $this->validate($request, Todo::$rules);
+        $this->validate($request, Todoexe::$rules);
         $form =$request->all();
         unset($form['_token']);
         Todoexe::where('id', $request->id)->update($form);
@@ -31,7 +31,12 @@ class TodoController extends Controller
     }
     Public function delete(Request $request)
     {
-       $items =Todoexe::find($request->id)->delete();
-       return redirect('/');
+        $items = Todoexe::find($request->id);
+        return view('delete', ['form'=> $items]);
+    }
+    Public function remove(Request $request)
+    {
+        Todoexe::find($request->id)->delete();
+        return redirect('/');
     }
 }
